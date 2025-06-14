@@ -1,11 +1,9 @@
 import { Component } from "react";
-import { Toolbar } from "./toolbar";
-import { ProjectList } from "./projectlist";
 export class Portfolio extends Component {  
     constructor(props) {
         super(props);
-        this.onSelectFilter = onSelectFilter().bind(this);
-        this.state = {state: 1};
+        this.onSelectFilter = this.onSelectFilter().bind(this);
+        this.state = {state: 0};
         this.selected="All";
         this.cards=[
             { img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/mon.jpg",
@@ -62,17 +60,39 @@ export class Portfolio extends Component {
         ];
 
     }    
-
-    Render() {            
-        onSelectFilter = (e) => {
+    onSelectFilter = (e) => {
         e.preventDefault();
-        this.state = {state: this.state += 1}
+        this.setState ({state: this.state + 1})
         this.selected = e.target.innerText;
-        }       
-        
-        return (           
-            <Toolbar />
-            <ProjectList />
+    } 
+
+    render() {        
+        return ( 
+            <body>         
+                <Toolbar />
+                <div className="activeCards">
+                    <ProjectList />
+                </div>
+            </body>                      
         )
     }
+}
+
+function ProjectList (selected, cards) {
+    return (        
+        this.selected === 'All' ? this.cards.map(card => card = <div className="cardImage"><img src={card.img} alt={card.category} /></div>) : this.cards.filter(card => card.category === selected).map(card => card = <div className="cardImage"><img src={card.img} alt={card.category} /></div>)        
+    )
+}
+
+function Toolbar (onSelectFilter) { 
+    return (
+        <div>
+            <ul className="filters" onClick={onSelectFilter()}>
+                <li>All</li>
+                <li>Websites</li>
+                <li>Flayers</li>
+                <li>Business Cards</li>
+            </ul>
+        </div>
+    )
 }

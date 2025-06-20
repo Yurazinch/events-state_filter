@@ -1,10 +1,11 @@
 import { Component } from "react";
+import { ProjectList } from "./projectlist";
+import { Toolbar } from "./toolbar";
 export class Portfolio extends Component {  
     constructor(props) {
         super(props);
-        this.onSelectFilter = this.onSelectFilter().bind(this);
-        this.state = {state: 0};
-        this.selected="All";
+        this.onSelectFilter = this.onSelectFilter.bind(this);
+        this.state = { selected: "All"};       
         this.cards=[
             { img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/mon.jpg",
                 category: "Business Cards"
@@ -60,39 +61,20 @@ export class Portfolio extends Component {
         ];
 
     }    
-    onSelectFilter = (e) => {
-        e.preventDefault();
-        this.setState ({state: this.state + 1})
-        this.selected = e.target.innerText;
+    onSelectFilter = (event) => {        
+        this.setState (state => ({
+            selected: state.selected = event.target.textContent
+        }));        
     } 
 
     render() {        
         return ( 
-            <body>         
+            <div>
                 <Toolbar />
                 <div className="activeCards">
                     <ProjectList />
                 </div>
-            </body>                      
+            </div>                      
         )
     }
-}
-
-function ProjectList (selected, cards) {
-    return (        
-        this.selected === 'All' ? this.cards.map(card => card = <div className="cardImage"><img src={card.img} alt={card.category} /></div>) : this.cards.filter(card => card.category === selected).map(card => card = <div className="cardImage"><img src={card.img} alt={card.category} /></div>)        
-    )
-}
-
-function Toolbar (onSelectFilter) { 
-    return (
-        <div>
-            <ul className="filters" onClick={onSelectFilter()}>
-                <li>All</li>
-                <li>Websites</li>
-                <li>Flayers</li>
-                <li>Business Cards</li>
-            </ul>
-        </div>
-    )
 }

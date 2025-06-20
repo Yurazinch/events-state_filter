@@ -2,9 +2,17 @@ export function ProjectList (props) {
 
     const {state, cards} = props;
 
+    let cardSow;
+
     if(state.selected === 'All') {
-        return (cards.map(card => (<div className="cardImage"><img src={card.img} alt={card.category} /></div> )));
+        cardSow = cards.map(card => (<div className="cardImage"><img src={card.img} alt={card.category} /></div> ));
     } else {
-        return (cards.filter(card => card.category === state.selected).map(card => (<div className="cardImage"><img src={card.img} alt={card.category} /></div>)));
+        cardSow = cards.filter(card => card.category === state.selected).map(card => (<div className="cardImage"><img src={card.img} alt={card.category} /></div>));
     }
+
+    return (
+        <div>
+            {cardSow}
+        </div>
+    )
 }

@@ -5,9 +5,11 @@ import { Portfolio } from './portfolio';
 function App() {
   return (
     <div className="App">
-      <header>
-        <Portfolio />                  
-      </header>         
+      <header>        
+      </header> 
+      <body>
+        <Portfolio />  
+      </body>                        
     </div>
   );
 }

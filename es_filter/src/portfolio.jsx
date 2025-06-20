@@ -71,9 +71,7 @@ export class Portfolio extends Component {
         return ( 
             <div>
                 <Toolbar />
-                <div className="activeCards">
-                    <ProjectList />
-                </div>
+                <ProjectList />                
             </div>                      
         )
     }

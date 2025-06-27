@@ -1,4 +1,4 @@
-export function ProjectList ({activeItem}) {
+export function ProjectList ({points, activeItem}) {
 
     const cards=[
         { img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/mon.jpg",
@@ -54,13 +54,15 @@ export function ProjectList ({activeItem}) {
         }
     ];
 
-    let cardShow = cards.map( (card, index) => (<div key={index}  className="cardImage"><img src={card.img} alt={card.category} /></div> ));
+    const filtered = cards.filter((card) => card.category.includes({activeItem}));
 
-    /*if(activeItem === 'All') {
+    let cardShow;
+
+    if( filtered.lenght === cards.lenght ) {
         cardShow = cards.map((card, index) => (<div key={index} className="cardImage"><img src={card.img} alt={card.category} /></div> ));
     } else {
-        cardShow = cards.filter(card => card.category === activeItem).map((card, index) => (<div key={index} className="cardImage"><img src={card.img} alt={card.category} /></div>));
-    }*/
+        cardShow = filtered.map((card, index) => (<div key={index} className="cardImage"><img src={card.img} alt={card.category} /></div>));
+    }
 
     return (
         <div className='performance'>

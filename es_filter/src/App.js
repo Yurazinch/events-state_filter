@@ -13,18 +13,17 @@ function App() {
         {item}
       </li>
     );
-  } 
+  }
+  
+  const points = [ "All", "Websites", "Flayers", "Business Cards" ];
+
+  const [activeItem, setActiveItem] = useState('All');
+    
+  const onSelectFilter = (item) => {
+    setActiveItem(item);       
+  }
 
   function Menu() {
-
-    const [activeItem, setActiveItem] = useState('All');
-
-    const points = [ "All", "Websites", "Flayers", "Business Cards" ];    
-    
-    const onSelectFilter = (item) => {
-      setActiveItem(item);
-    };
-
     return (
       <ul>
         {points.map((item, index) => (
@@ -40,12 +39,13 @@ function App() {
   }  
   
   return (
-    <div /*className="App"*/>
+    <div>
       <div className='menu'>
         <Menu />
       </div>      
-      <div>
-        <ProjectList />  
+      <div className='performance'>
+        
+        <ProjectList setCategory={activeItem}/>         
       </div>                        
     </div>
   );
